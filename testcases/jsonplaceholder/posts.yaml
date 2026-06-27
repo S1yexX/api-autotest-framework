@@ -1,0 +1,117 @@
+- name: "创建文章-正常场景"
+  tags: ["smoke", "posts", "positive"]
+  allure:
+    epic: "JSONPlaceholder"
+    feature: "文章管理"
+    story: "新增文章"
+  request:
+    method: POST
+    url: "/posts"
+    json:
+      title: "自动化测试文章"
+      body: "YAML驱动接口自动化框架演示"
+      userId: 1
+  extract:
+    - name: new_post_id
+      jsonpath: "$.id"
+  assert:
+    status_code: 201
+    json:
+      userId: 1
+
+- name: "获取全部文章列表"
+  tags: ["smoke", "posts", "positive"]
+  allure:
+    epic: "JSONPlaceholder"
+    feature: "文章管理"
+    story: "文章列表"
+  request:
+    method: GET
+    url: "/posts"
+  assert:
+    status_code: 200
+
+- name: "查询已有文章并提取ID"
+  tags: ["smoke", "posts", "positive"]
+  allure:
+    epic: "JSONPlaceholder"
+    feature: "文章管理"
+    story: "查询单篇文章"
+  request:
+    method: GET
+    url: "/posts/1"
+  extract:
+    - name: post_id
+      jsonpath: "$.id"
+  assert:
+    status_code: 200
+
+- name: "使用提取的ID再次查询同一文章-演示变量引用"
+  tags: ["posts", "positive"]
+  allure:
+    epic: "JSONPlaceholder"
+    feature: "文章管理"
+    story: "变量引用查询"
+  request:
+    method: GET
+    url: "/posts/${post_id}"
+  assert:
+    status_code: 200
+    json:
+      id: "${post_id}"
+
+- name: "查询不存在文章-异常场景"
+  tags: ["negative", "posts"]
+  allure:
+    epic: "JSONPlaceholder"
+    feature: "文章管理"
+    story: "异常查询"
+  request:
+    method: GET
+    url: "/posts/999999"
+  assert:
+    status_code: 404
+
+- name: "更新文章-正常场景"
+  tags: ["posts", "positive"]
+  allure:
+    epic: "JSONPlaceholder"
+    feature: "文章管理"
+    story: "更新文章"
+  request:
+    method: PUT
+    url: "/posts/1"
+    json:
+      title: "更新后的文章标题"
+      body: "更新后的正文内容"
+      userId: 1
+  assert:
+    status_code: 200
+    json:
+      id: 1
+
+- name: "删除文章-正常场景"
+  tags: ["posts", "positive"]
+  allure:
+    epic: "JSONPlaceholder"
+    feature: "文章管理"
+    story: "删除文章"
+  request:
+    method: DELETE
+    url: "/posts/1"
+  assert:
+    status_code: 200
+
+- name: "按用户ID筛选文章"
+  tags: ["posts", "positive"]
+  allure:
+    epic: "JSONPlaceholder"
+    feature: "文章管理"
+    story: "按条件筛选"
+  request:
+    method: GET
+    url: "/posts"
+    params:
+      userId: 1
+  assert:
+    status_code: 200

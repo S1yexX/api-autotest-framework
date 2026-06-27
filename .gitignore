@@ -1,0 +1,22 @@
+# 运行产物
+logs/
+reports/allure-results/
+reports/allure-report/
+reports/*.html
+__pycache__/
+*.pyc
+*.pyd
+
+# 虚拟环境
+venv/
+env/
+.venv/
+
+# IDE配置
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 系统文件
+.DS_Store

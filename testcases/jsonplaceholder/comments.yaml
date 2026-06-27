@@ -1,0 +1,35 @@
+- name: "查询文章评论-正常场景"
+  tags: ["smoke", "positive"]
+  allure:
+    epic: "JSONPlaceholder"
+    feature: "评论管理"
+    story: "查询评论"
+  request:
+    method: GET
+    url: "/posts/1/comments"
+  assert:
+    status_code: 200
+
+- name: "查询不存在文章的评论-异常场景"
+  tags: ["negative"]
+  allure:
+    epic: "JSONPlaceholder"
+    feature: "评论管理"
+    story: "异常查询"
+  request:
+    method: GET
+    url: "/posts/999999/comments"
+  assert:
+    status_code: 200
+
+- name: "按评论ID查询-正常场景"
+  tags: ["positive"]
+  allure:
+    epic: "JSONPlaceholder"
+    feature: "评论管理"
+    story: "单条评论查询"
+  request:
+    method: GET
+    url: "/comments/1"
+  assert:
+    status_code: 200
