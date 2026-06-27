@@ -1,0 +1,4 @@
+base_url: https://reqres.in
+timeout: 30
+headers:
+  Content-Type: application/json
