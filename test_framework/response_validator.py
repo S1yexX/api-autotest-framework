@@ -18,7 +18,11 @@ def validate_response(resp, assertions: dict) -> bool:
     :raises AssertionError: 校验失败时抛出，包含所有不匹配项详情
     """
     errors: List[str] = []
-    resp_json: Dict[str, Any] = resp.json() if resp.content else {}
+    # 安全解析 JSON：非 JSON 响应（如 503 HTML 页面）不应导致框架崩溃
+    try:
+        resp_json: Dict[str, Any] = resp.json() if resp.content else {}
+    except Exception:
+        resp_json = {}
 
     # 1. 状态码断言
     if "status_code" in assertions:
