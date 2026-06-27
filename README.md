@@ -29,14 +29,12 @@ api-autotest-framework/
 │   ├── settings.yaml               # 框架全局配置
 │   └── env/
 │       ├── dev.yaml                # 开发环境（JSONPlaceholder）
-│       └── staging.yaml            # 预发环境（Reqres）
+│       └── staging.yaml            # 预发环境
 ├── testcases/                      # YAML 测试用例（零代码核心）
 │   ├── jsonplaceholder/
 │   │   ├── posts.yaml              # 文章 CRUD 用例
 │   │   ├── comments.yaml           # 评论查询用例
 │   │   └── users.yaml              # 用户管理用例
-│   ├── reqres/
-│   │   └── users.yaml              # Reqres 用户用例
 │   └── httpbin/
 │       └── debug.yaml              # Httpbin 调试用例
 ├── test_framework/                 # 底层核心引擎
@@ -91,7 +89,7 @@ pytest test_runner/ --env dev -m smoke
 pytest test_runner/ --env dev -m posts
 
 # 指定用例目录
-pytest test_runner/ --env dev --cases testcases/reqres
+pytest test_runner/ --env dev --cases testcases/jsonplaceholder
 
 # 并行执行（4 线程）
 pytest test_runner/ --env dev -n 4

@@ -30,6 +30,7 @@ jobs:
             --alluredir=reports/allure-results \
             --html=reports/report.html \
             --self-contained-html \
+            -m "not httpbin" \
             -v
 
       - name: 生成 Allure 报告

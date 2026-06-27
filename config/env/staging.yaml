@@ -1,4 +1,4 @@
-base_url: https://reqres.in
+base_url: https://jsonplaceholder.typicode.com
 timeout: 30
 headers:
   Content-Type: application/json

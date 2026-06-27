@@ -11,7 +11,13 @@ def extract_variable(response, extract_rule: dict) -> Any:
     :param extract_rule: {"name": "post_id", "jsonpath": "$.id"}
     :return: 提取到的第一个匹配值
     """
-    resp_json = response.json()
+    # 安全解析 JSON：非 2xx 响应可能返回 HTML 而非 JSON
+    try:
+        resp_json = response.json()
+    except Exception:
+        raise ValueError(
+            f"变量提取失败，响应非 JSON 格式 (status={response.status_code})"
+        )
     path: str = extract_rule["jsonpath"]
     result = search(path, resp_json)
     if not result:
