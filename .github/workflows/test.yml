@@ -1,47 +1,26 @@
-name: API Auto Test CI
+name: API Tests
 
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
-  schedule:
-    - cron: '0 8 * * 1-5'  # 工作日早8点定时执行
 
 jobs:
-  run_test:
+  test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: 拉取代码
-        uses: actions/checkout@v4
-
-      - name: 配置 Python 3.12
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-
-      - name: 安装依赖
+          python-version: "3.12"
+      - name: Install dependencies
         run: pip install -r requirements.txt
-
-      - name: 执行接口自动化用例
-        run: |
-          pytest test_runner/ --env dev \
-            --alluredir=reports/allure-results \
-            --html=reports/report.html \
-            --self-contained-html \
-            -m "not httpbin" \
-            -v
-
-      - name: 生成 Allure 报告
-        if: always()
-        run: |
-          npm install -g allure-commandline
-          allure generate reports/allure-results -o reports/allure-report --clean
-
-      - name: 上传测试报告产物
+      - name: Run tests
+        run: pytest
+      - name: Upload HTML report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: api-test-reports
+          name: test-report
           path: reports/

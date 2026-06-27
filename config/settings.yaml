@@ -1,3 +1,0 @@
-allure_report_dir: reports/allure-results
-log_level: INFO
-retry_count: 1

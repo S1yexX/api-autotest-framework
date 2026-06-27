@@ -1,22 +1,23 @@
-# 运行产物
-logs/
-reports/allure-results/
-reports/allure-report/
-reports/*.html
+# Python
 __pycache__/
-*.pyc
-*.pyd
+*.py[cod]
+*.egg-info/
 
-# 虚拟环境
+# Virtual environments
 venv/
-/env/
+env/
 .venv/
+.env
 
-# IDE配置
+# IDE
 .idea/
 .vscode/
 *.swp
-*.swo
 
-# 系统文件
+# Test artifacts
+reports/
+.pytest_cache/
+
+# OS
 .DS_Store
+Thumbs.db
