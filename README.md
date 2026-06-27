@@ -1,6 +1,6 @@
 # YAML 零代码接口自动化测试框架
 
-[![API Auto Test CI](https://github.com/your-username/api-autotest-framework/actions/workflows/test.yml/badge.svg)](https://github.com/your-username/api-autotest-framework/actions/workflows/test.yml)
+[![API Auto Test CI](https://github.com/S1yexX/api-autotest-framework/actions/workflows/test.yml/badge.svg)](https://github.com/S1yexX/api-autotest-framework/actions/workflows/test.yml)
 
 ## 项目简介
 
@@ -66,7 +66,7 @@ api-autotest-framework/
 
 ```bash
 # 克隆仓库
-git clone https://github.com/your-username/api-autotest-framework.git
+git clone https://github.com/S1yexX/api-autotest-framework.git
 cd api-autotest-framework
 
 # 创建虚拟环境（推荐）
